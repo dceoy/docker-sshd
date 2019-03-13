@@ -1,0 +1,18 @@
+---
+version: '3'
+
+services:
+  sshd:
+    container_name: sshd
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dceoy/sshd:latest
+    ports:
+      - '2222:22'
+    volumes:
+      - ./keys:/etc/ssh/authorized_keys:ro
+    entrypoint:
+      - /usr/sbin/sshd
+    command:
+      - -D
