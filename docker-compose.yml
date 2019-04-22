@@ -15,5 +15,6 @@ services:
     entrypoint:
       - /usr/sbin/sshd
     command:
-      - -D
-      - -e
+      - -D  # sshd will not detach and does not become a daemon.
+      - -e  # Write debug logs to standard error.
+    # - -d  # Debug mode.

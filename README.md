@@ -25,7 +25,7 @@ Usage
 2.  Create public/private RSA key pair.
 
     ```sh
-    $ docker-compose --rm --entrypoint=/usr/bin/ssh-keygen --volume=${PWD}/keys:/root/.ssh sshd -t rsa
+    $ docker-compose run --rm --entrypoint=/usr/bin/ssh-keygen --volume=${PWD}/keys:/root/.ssh sshd -t rsa
     ```
 
     If you use an already-existing pair, copy the public key file into `keys/` instead of the above step.

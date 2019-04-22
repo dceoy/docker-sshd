@@ -8,10 +8,15 @@ RUN set -e \
 RUN set -e \
       && apt-get -y update \
       && apt-get -y dist-upgrade \
-      && apt-get -y install --no-install-recommends --no-install-suggests ssh \
+      && apt-get -y install --no-install-recommends --no-install-suggests \
+        locales ssh \
       && apt-get -y autoremove \
       && apt-get clean \
       && rm -rf /var/lib/apt/lists/*
+
+RUN set -e \
+      && locale-gen en_US.UTF-8 \
+      && update-locale
 
 RUN set -e \
       && mkdir -p /var/run/sshd /etc/ssh/authorized_keys \
@@ -21,7 +26,6 @@ RUN set -e \
         -e 's/^#\(PasswordAuthentication\s\+\).*$/\1no/' \
         -e 's/^#\(AuthorizedKeysFile\s\+\).*$/\1\/etc\/ssh\/authorized_keys\/%u/' \
         /etc/ssh/sshd_config
-#     && ln -sf /dev/stdout /var/log/auth.log
 
 EXPOSE 22
 
